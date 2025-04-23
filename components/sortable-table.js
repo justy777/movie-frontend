@@ -27,7 +27,7 @@ export default function SortableTable({ items }) {
   return (
     <table className="table-auto border-collapse">
       <thead>
-        <tr className="border-b">
+        <tr className="border-b border-gray-200">
           {Object.keys(items[0]).map((field) => (
             <th
               key={field}
@@ -41,7 +41,7 @@ export default function SortableTable({ items }) {
                 >
                   {capitalizeFirstLetter(field)}
                   {sortedField === field ? (
-                    <span className="ml-2 bg-gray-100 group-hover:bg-gray-200 dark:bg-gray-800 dark:group-hover:bg-gray-700 rounded">
+                    <span className="ml-2 bg-gray-100 group-hover:bg-gray-200 dark:bg-gray-800 dark:group-hover:bg-gray-700 rounded-sm">
                       {isAscending ? (
                         <ChevronUpIcon className="h-5 w-5" />
                       ) : (
@@ -49,7 +49,7 @@ export default function SortableTable({ items }) {
                       )}
                     </span>
                   ) : (
-                    <span className="ml-2 invisible group-hover:visible rounded">
+                    <span className="ml-2 invisible group-hover:visible rounded-sm">
                       <ChevronUpDownIcon className="h-5 w-5 text-gray-400 dark:text-gray-600" />
                     </span>
                   )}
@@ -62,7 +62,7 @@ export default function SortableTable({ items }) {
       <tbody>
         {sortedItems.map((item) => (
           <tr
-            className="border-t hover:bg-slate-200 dark:hover:bg-gray-700"
+            className="border-t border-gray-200 hover:bg-slate-200 dark:hover:bg-gray-700"
             key={item.id}
           >
             {Object.entries(item).map(([key, value]) => (
@@ -74,13 +74,13 @@ export default function SortableTable({ items }) {
               <div className="inline-flex">
                 <button
                   type="button"
-                  className="bg-yellow-500 hover:bg-yellow-700 text-sm dark:text-white py-2 px-3 rounded-l"
+                  className="bg-yellow-500 hover:bg-yellow-700 text-sm dark:text-white py-2 px-3 rounded-l-sm"
                 >
                   Edit
                 </button>
                 <button
                   type="button"
-                  className="bg-red-500 hover:bg-red-700 text-sm dark:text-white py-2 px-3 rounded-r"
+                  className="bg-red-500 hover:bg-red-700 text-sm dark:text-white py-2 px-3 rounded-r-sm"
                 >
                   Delete
                 </button>
