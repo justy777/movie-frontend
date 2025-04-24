@@ -14,7 +14,7 @@ export default function Page() {
           Add movie
         </button>
       </div>
-      <SortableTable items={movies} />
+      <SortableTable data={movies} />
     </>
   );
 }

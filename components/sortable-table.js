@@ -8,7 +8,8 @@ import {
 } from "@heroicons/react/20/solid";
 import { capitalizeFirstLetter, sortOnField } from "../lib/sortable-table";
 
-export default function SortableTable({ items }) {
+export default function SortableTable({ data }) {
+  const [items, setItems] = useState([...data]);
   const [sortedField, setSortedField] = useState(null);
   const [isAscending, setIsAscending] = useState(true);
 
@@ -19,10 +20,15 @@ export default function SortableTable({ items }) {
       setIsAscending(true);
     }
     setSortedField(field);
+
+    let sortedItems = sortedField !== null ? sortOnField(items, sortedField, isAscending) : items;
+    setItems(sortedItems);
   }
 
-  let sortedItems =
-    sortedField !== null ? sortOnField(items, sortedField, isAscending) : items;
+  function handleDelete(id) {
+    const newItems = items.filter((item) => item.id !== id);
+    setItems(newItems);
+  }
 
   return (
     <table className="table-auto border-collapse">
@@ -60,7 +66,7 @@ export default function SortableTable({ items }) {
         </tr>
       </thead>
       <tbody>
-        {sortedItems.map((item) => (
+        {items.map((item) => (
           <tr
             className="border-t border-gray-200 hover:bg-slate-200 dark:hover:bg-gray-700"
             key={item.id}
@@ -80,6 +86,7 @@ export default function SortableTable({ items }) {
                 </button>
                 <button
                   type="button"
+                  onClick={() => handleDelete(item.id)}
                   className="bg-red-500 hover:bg-red-700 text-sm dark:text-white py-2 px-3 rounded-r-sm"
                 >
                   Delete
