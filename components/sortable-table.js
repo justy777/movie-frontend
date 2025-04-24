@@ -14,14 +14,12 @@ export default function SortableTable({ data }) {
   const [isAscending, setIsAscending] = useState(true);
 
   function handleSort(field) {
-    if (sortedField === field) {
-      setIsAscending(!isAscending);
-    } else {
-      setIsAscending(true);
-    }
-    setSortedField(field);
+    const newIsAscending = (sortedField === field) ? !isAscending : true;
 
-    let sortedItems = sortedField !== null ? sortOnField(items, sortedField, isAscending) : items;
+    setSortedField(field);
+    setIsAscending(newIsAscending);
+
+    let sortedItems = sortOnField(items, field, newIsAscending);
     setItems(sortedItems);
   }
 
